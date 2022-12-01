@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %} Рецепты {% endblock %}
+ 
+{% block body %}
+<!-- {{recepies}} -->
+
+<!-- {{recepies}} -->
+  
+{% for r in recepies%} 
+ <ul>
+<li>
+ <p>  {% for i in r%} 
+
+ {{i}}
+ 
+ <p>________
+ </p>
+ </p>
+
+ {% endfor %} 
+
+ <p> 
+ </p>
+  </li>
+   </ul>
+   {% endfor %} 
+   
+<a href="{{ url_for('index') }}">Назад</a>
+
+ {% endblock %}

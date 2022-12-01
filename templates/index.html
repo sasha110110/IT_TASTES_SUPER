@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+
+{% block body %}
+
+ <article>
+    <form action="" method="post" novalidate align="center">
+       {{ form.hidden_tag() }}
+ 
+     
+	 
+	
+    
+     <p>
+         <h2>  {{form.taste.label}} </h2>
+          {{form.taste(size=32)}}
+ 
+           {% for error in form.taste.errors %}
+          <span style="color:red;">
+ 
+              {{error}}
+          </span>
+          {% endfor %}
+       </p>
+ 
+ 
+		 
+        <p>
+            <input type="submit" value="Найти!" class="btn btn-success">
+
+ 
+        </p>
+		 </form>
+		 
+		 <form id="reset">
+		<input type="reset" value="reset" class="btn btn-success">
+		</form>
+ 
+ 
+	Наиболее класснфе и необычные сочетания с этим продуктом такие: 
+       
+ <p>
+ 
+ 
+ 
+ 
+         {% if ingredients_to_search %}
+		 
+<form action="{{ url_for('recepies') }}" method="post">	 
+         {% for taste in ingredients_to_search%} 
+		 		 <p>
+		      
+       <button class="choice_button" type="submit" name="choice_button" 
+           value="{{ taste }}">{{taste}}</button>
+ 
+    </p>
+
+  {% endfor %}
+  
+  <h3> Кликните, чтобы подобрать рецепт для выбранного сочетания</h3>
+  {% endif %}
+  
+
+ </p>
+ </form>
+     </article>   
+{% endblock %}

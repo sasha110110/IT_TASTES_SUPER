@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 22px;
+}
+
+/* Style the header */
+header {
+  background-color: #666;
+  padding: 10px;
+  text-align: left;
+  font-size: 24px;
+  color: white;
+}
+article {
+  float: left;
+  padding: 20px;
+  width: 70%;
+  background-color: white;
+}
+
+ul { 
+        background: white; 
+        margin: 12px 12px 12px 12px;
+        padding: 3px 3px 3px 3px;
+		width: 80%;
+		border: 3px solid cyan;
+                                     /* No borders set */
+      }
+li { 
+        color: black;                /* text color is white */ 
+        background: white;            /* Content, padding will be blue */
+        margin: 8px 8px 8px 8px;
+        padding: 8px 0px 8px 8px; /* Note 0px padding right */
+        list-style: none             /* no glyphs before a list item */
+        border: 4px; 
+       width: 800px;
+      }
+
+body {background-image: url('../static/images/2.JPG');
+
+
+
+</style>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+</head>
+
+
+
+<header>
+  <h1>Необычные блюда из обычных ингредиентов</h1>
+  <h3>Рецепты с  необычными сочетаниями продуктов <h3>
+</header>
+
+<body>
+{% block body %}
+{% endblock %}
+ 
+</body>
+</html>

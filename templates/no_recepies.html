@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}  {% endblock %}
+ 
+{% block body %}
+
+<p>Мы не смогли найти рецепта со всеми этими ингридиентами, 
+но мы можем подобрать рецепт с основным ингридиентом и 
+Вы просто добавите в него этот второй ингридиент для вкуса! 
+</p>
+
+<div>
+<form action="{{ url_for('single_ingredient_recepies') }}" method="post">	 
+		      
+       <button class="choice_button" style="width:200px;" type="submit" name="choice_button" 
+           value="Найти!">Найти!</button>
+		   
+		   </form>
+
+ </div>
+
+ <div>   <p>
+	<form>
+	<a href="{{ url_for('index') }}">Назад</a>
+	</p>
+	</form>
+	</div>
+{% endblock %}
