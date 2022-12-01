@@ -28,13 +28,8 @@ for item in tastes:
         TASTE[item[0]].append(item[1])
     
 
-with open("recepies.pkl", "rb") as f:
+with open("recepies1.pkl", "rb") as f:
   tastes_df=pickle.load(f)
-
-tastes_df = tastes_df.iloc[: , :-2]
-
-
-
 
 
 
@@ -78,12 +73,7 @@ def index():
         if not form.taste.data.lower() in TASTE.keys():
             result_taste="Что-то ничего не смогли найти =("
 
-    
-        #return redirect(url_for("recepies", taste=taste)) #(f'recepies/{taste}'))
-            
-
-        #result_recepie= #TO DO _ SEARCH
-
+   
 
     form.taste.data = ""
     return render_template('index.html', form=form, ingredients_to_search=ingredients_to_search)
@@ -93,41 +83,24 @@ def recepies():
     global tastes_df
     if request.method == 'POST':
         taste=request.form["choice_button"]# BUTTONS WITH INGREDIENT LIST
-        print(type(taste))
         resulttaste = "".join(x for x in taste if x.isalpha() or x.isspace())
-        print(resulttaste)
         taste_list=resulttaste.split(" ") #list
-        print(taste_list)
+        
         ingredients_tokens=[token_item(item) for item in taste_list]
-        print( ingredients_tokens, type(ingredients_tokens))
-        print(len(ingredients_tokens))
-
+   
     
-        result_df=tastes_df[tastes_df["Состав"].apply(lambda a: all(i in str(a) for i in ingredients_tokens))]
+        result_df=tastes_df[tastes_df["Состав"].apply(lambda a: all(i in str(a) for i in ingredients_tokens))][:10]
         if "сыр" in ingredients_tokens:
           result_df=result_df[result_df["Состав"].str.contains("сыры|сырая|сыро")==False]
         if "виногра" in ingredients_tokens:
           result_df=result_df[result_df["Состав"].str.contains("виноградн")==False]
-        result_df["Описание"]=result_df["Описание"].str.replace("_x000D_", "").replace('\n', "")
-        #result_df = result_df.iloc[: , :-2]
-        print("_________________________________________")
-        print("_________________________________________")
-        print("_________________________________________")
-        print(result_df.shape)
-        print(result_df.columns)
+        result_df["Описание"].str.replace("_x000D_", "").replace('\n', "")
+ 
         
         
         result_df_list=list(result_df.values)
 
-        print(type(result_df_list))
-        print(len(result_df_list))
-        for item in result_df_list:
-            print(item, "/n", "______________________________________________________")
-        
-      
-##        for i in range(0, len(result_df)):
-##            print(result_df.iloc[i])
-        ##result_df_html=tabulate(result_df, headers='keys', tablefmt='html')
+  
             
         if len(result_df)==0:
           return redirect(url_for("no_recepies"))
@@ -146,13 +119,9 @@ def single_ingredient_recepies():
     global tastes_df
     if request.method == 'POST':
       single_ingredient=token_item(tastedata)
-      print("_________________________________________")
-      print("_________________________________________")
-      print("_________________________________________")
-      print(single_ingredient)
-      print(type(single_ingredient))
+     
       result_df=tastes_df[tastes_df["Состав"].str.contains(single_ingredient)==True]
-      result_df["Описание"]=result_df["Описание"].str.replace("_x000D_", "").replace('\n', "")
+      result_df["Описание"].str.replace("_x000D_", "").replace('\n', "")
       result_df_list=list(result_df.values)
     return render_template("single_ingredient_recepies.html", recepies=result_df_list)
       
